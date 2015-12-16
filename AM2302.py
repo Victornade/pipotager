@@ -3,12 +3,10 @@ import os
 import logging
 import sys
 import Adafruit_DHT
-from config import *
+import config
 
-def getTempHum_pin():
-	return tempHum_pin
-	
+
 def getHumTemp():
-	result_humidite, result_temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, tempHum_pin)
+	result_humidite, result_temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, config.get('AM2302_pin'))
 	return result_humidite, result_temperature
 

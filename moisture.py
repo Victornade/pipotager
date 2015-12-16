@@ -8,12 +8,9 @@ import logging
 import RPi.GPIO as GPIO
 import sys
 from readMCP3008 import readadc
-
+import config
 # change these as desired - they're the pins connected from the
 # SPI port on the ADC to the Cobbler
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-
 
 def getMoisture(pin):
 	result_moisture = 0

@@ -2,18 +2,18 @@ import os
 import logging
 import RPi.GPIO as GPIO
 import sys
-from config import * 
+import config
 #set up the SPI interface pins
-GPIO.setup(SPIMOSI, GPIO.OUT)
-GPIO.setup(SPIMISO, GPIO.IN)
-GPIO.setup(SPICLK, GPIO.OUT)
-GPIO.setup(SPICS, GPIO.OUT)
+GPIO.setup(config.get('SPIMOSI'), GPIO.OUT)
+GPIO.setup(config.get('SPIMISO'), GPIO.IN)
+GPIO.setup(config.get('SPICLK'), GPIO.OUT)
+GPIO.setup(config.get('SPICS'), GPIO.OUT)
 
 
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
 
 def readadc(adcnum):
-	return read(adcnum, SPICLK, SPIMOSI, SPIMISO, SPICS)
+	return read(adcnum, config.get('SPICLK'), config.get('SPIMOSI'), config.get('SPIMISO'), config.get('SPICS'))
 
 def read(adcnum, clockpin, mosipin, misopin, cspin):
 	GPIO.setmode(GPIO.BCM)

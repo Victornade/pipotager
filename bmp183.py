@@ -1,9 +1,14 @@
 import RPi.GPIO as GPIO
 import time
 import numpy
-from config import *
+import config
 
-GPIO.setwarnings(False)
+
+spi_sck=config.get('sck')
+spi_sdo=config.get('sdo')
+spi_sdi=config.get('sdi')
+spi_cs=config.get('cs')
+
 class bmp183():
         'Class for Bosch BMP183 pressure and temperature sensor with SPI interface as sold by Adafruit'
         # BMP183 registers

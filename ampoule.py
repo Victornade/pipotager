@@ -7,8 +7,8 @@ import os
 import logging
 import RPi.GPIO as GPIO
 import sys
-from config import *
-
+import config 
+AMPOULE_PIN= config.get('AMPOULE_PIN')
 GPIO.setup(AMPOULE_PIN, GPIO.OUT)
 
 def isAmpouleOn():
@@ -31,7 +31,7 @@ def checkAmpoule():
 	heure = time.strftime('%H',time.localtime())
 	heure = int(heure)
 	
-	if heure>=heure_debut and heure<heure_fin:
+	if heure>=config.get('Heure_jour') and heure<config.get('Heure_nuit'):
 		light_on()
 	else:
 		light_off()

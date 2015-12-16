@@ -5,7 +5,7 @@ import os
 import logging
 import sys
 #from water import *
-from ampoule import *
+#from ampoule import *
 from moisture import *
 from lux import *
 from AM2302 import *
@@ -40,11 +40,11 @@ result_humidite, result_temperature = getHumTemp()
 # schart_temp = append_chart_point(schart_temp, float(result_temperature))
 print 'humidite air:', result_humidite
 #Lumiere
-result_lux = float(getLux())
-print 'lumiere:', result_lux
+#result_lux = float(getLux())
+#print 'lumiere:', result_lux
 #pression et temperature
 bmp.measure_pressure()
-result_temperature = bmp.temperature
+#result_temperature = bmp.temperature
 print 'temperature ', result_temperature
 result_pression = float(bmp.pressure/100)
 print 'pression ', result_pression
