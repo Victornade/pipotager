@@ -5,7 +5,7 @@ import time
 while True:
         heure = time.strftime('%H',time.localtime())
         heure = int(heure)
-	if arrosage_auto == 'True':
+	if config.get("arrosage_auto") == 'On':
 	        if heure==config.get('arrosage_matin') or heure==config.get('arrosage_soir'):
 	                water.checkWater()
         minute = time.strftime('%M',time.localtime())

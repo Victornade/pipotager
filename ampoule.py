@@ -13,9 +13,9 @@ GPIO.setup(AMPOULE_PIN, GPIO.OUT)
 
 def isAmpouleOn():
 	if(GPIO.input(AMPOULE_PIN) == 0):
-		return 'on'
+		return 'On'
 	else:
-		return 'off'
+		return 'Off'
 
 def ampoule_PIN():
 	return AMPOULE_PIN

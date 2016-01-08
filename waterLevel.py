@@ -10,8 +10,9 @@ colemeter_pin=config.get('colemeter_pin')
 GPIO.setup(colemeter_pin, GPIO.IN)
 
 def isWaterEmpty():
+	config.updateConfig(GPIO.input(colemeter_pin), "reservoir")
 	if (GPIO.input(colemeter_pin)):
-		return '#007BFF'
+		return False
 	else:
-		return '#ff0000'
+		return True
 	

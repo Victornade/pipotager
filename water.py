@@ -55,7 +55,7 @@ def checkWater():
 		time.sleep(5)
 	
 def arrose(p):
-	 i=5
+	 i=8
 	 if p == 4 :
 	 	i=10
 	 time.sleep(2)
@@ -67,15 +67,15 @@ def arrose(p):
 def arrose_plante(p):
 	if p==0 :
 		#position nulle
-		bouge_bras(3,11.5)
+		bouge_bras(3,11)
 		time.sleep(1)
 		repos()
 	if p == 1:
-		bouge_bras(5,12)
+		bouge_bras(5,13.5)
                 arrose(p)
 		bouge_bras(4.5,8)	
 		arrose(p)
-		bouge_bras(4.5,10.5)
+		bouge_bras(4.5,12.5)
                 arrose(p)
 
 	if p == 2:
@@ -83,12 +83,12 @@ def arrose_plante(p):
                 arrose(p)
 		bouge_bras(6,11)
                 arrose(p)
-		bouge_bras(7.7,10)
+		bouge_bras(7.7,11)
                 arrose(p)
-     		bouge_bras(7.7,9.5)
-                arrose(p)
-		bouge_bras(10,8.2)
-                arrose(p)
+     		#bouge_bras(7.7,9.5)
+                #arrose(p)
+		#bouge_bras(10,8.2)
+                #arrose(p)
 	if p == 3:
 		bouge_bras(5.5,9.5)
                 arrose(p)
@@ -98,23 +98,23 @@ def arrose_plante(p):
                 arrose(p)
 		bouge_bras(9,7)
                 arrose(p)
-		bouge_bras(8.7,7)
+		bouge_bras(8.5,8)
                 arrose(p)
 	if p == 4:
-		bouge_bras(12,6.7)
+		bouge_bras(12,6)
                 arrose(p)
-		bouge_bras(12,6.2)
+		bouge_bras(12,7)
                 arrose(p)
-		bouge_bras(12,5.9)
+		bouge_bras(12,7.9)
                 arrose(p)
 	if p > 0:
 		arrose_plante(0)			
 
 
 def bouge_bras(m1, m2) :
-	max=7
+	max=9
 	for i in range(max) :
-		pwm2.ChangeDutyCycle(12-(12-m2)/(max-i))
+		pwm2.ChangeDutyCycle(10.5-(10.5-m2)/(max-i))
 		pwm1.ChangeDutyCycle(3+(m1-3)/(max-i))
 		time.sleep(0.1)
 
