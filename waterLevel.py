@@ -16,3 +16,8 @@ def isWaterEmpty():
 	else:
 		return True
 	
+if __name__ == '__main__' :
+	import time
+	while True : 
+		print(isWaterEmpty())
+		time.sleep(1)

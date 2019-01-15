@@ -1,3 +1,4 @@
+import RPi.GPIO as GPIO
 from bmp183 import bmp183
 
 GPIO.setwarnings(False)

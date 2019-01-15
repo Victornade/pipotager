@@ -1,9 +1,5 @@
-
-
 #!/usr/bin/env python
- 
-
- 
+  
 import os 
 import logging
 import RPi.GPIO as GPIO
@@ -11,14 +7,6 @@ import sys
 from moisture import *
 import time
 import config
-GPIO.setup(config.get('motor1_pin'),GPIO.OUT)
-GPIO.setup(config.get('motor2_pin'),GPIO.OUT)
-pwm1=GPIO.PWM(config.get('motor1_pin'),config.get('motor_pulse'))
-pwm2=GPIO.PWM(config.get('motor2_pin'),config.get('motor_pulse'))
-pwm1.start(5)
-pwm2.start(5)
-WATER_PIN=config.get('WATER_PIN')
-GPIO.setup(WATER_PIN, GPIO.OUT)
 
 
 def isWaterOn():
@@ -55,72 +43,86 @@ def checkWater():
 		time.sleep(5)
 	
 def arrose(p):
-	 i=8
-	 if p == 4 :
-	 	i=10
+	 i=3
 	 time.sleep(2)
 	 water_on()
          time.sleep(i)
          water_off()
 	 time.sleep(1)
 
+
 def arrose_plante(p):
-	if p==0 :
-		#position nulle
-		bouge_bras(3,11)
-		time.sleep(1)
-		repos()
-	if p == 1:
-		bouge_bras(5,13.5)
+        global pos1_init
+        global pos2_init
+        if p==0 :
+                #position nulle
+                bouge_bras(pos1_init,pos2_init)
+                time.sleep(1)
+                repos()
+        if p == 1:
+                bouge_bras(9,3)
                 arrose(p)
-		bouge_bras(4.5,8)	
-		arrose(p)
-		bouge_bras(4.5,12.5)
+                bouge_bras(8,3)
                 arrose(p)
-
-	if p == 2:
-		bouge_bras(7,11)
+        if p == 2:
+                bouge_bras(5.5,8.5)
                 arrose(p)
-		bouge_bras(6,11)
+                bouge_bras(5,9.5)
                 arrose(p)
-		bouge_bras(7.7,11)
+                bouge_bras(4,10.5)
                 arrose(p)
-     		#bouge_bras(7.7,9.5)
+        if p == 3:
+                bouge_bras(7.5,7.5)
+                arrose(p)
+                bouge_bras(5.5,8.5)
+                arrose(p)
+                bouge_bras(7.5,9)
+                arrose(p)
+        if p == 4:
+                bouge_bras(11.5,11.5)
+                arrose(p)
+                #bouge_bras(10.8,11)
                 #arrose(p)
-		#bouge_bras(10,8.2)
-                #arrose(p)
-	if p == 3:
-		bouge_bras(5.5,9.5)
+                bouge_bras(10,10.5)
                 arrose(p)
-		bouge_bras(6,8)
-                arrose(p)
-		bouge_bras(7,8)
-                arrose(p)
-		bouge_bras(9,7)
-                arrose(p)
-		bouge_bras(8.5,8)
-                arrose(p)
-	if p == 4:
-		bouge_bras(12,6)
-                arrose(p)
-		bouge_bras(12,7)
-                arrose(p)
-		bouge_bras(12,7.9)
-                arrose(p)
-	if p > 0:
-		arrose_plante(0)			
+        if p > 0:
+                arrose_plante(0)  
 
+
+
+def abs(n):
+    return math.sqrt(n**n)
 
 def bouge_bras(m1, m2) :
-	max=9
+	max=5
+	global pos1
+	global pos2
 	for i in range(max) :
-		pwm2.ChangeDutyCycle(10.5-(10.5-m2)/(max-i))
-		pwm1.ChangeDutyCycle(3+(m1-3)/(max-i))
+		pos2_next=pos2+(m2-pos2)/(max-(i))
+		pos1_next=pos1+(m1-pos1)/(max-(i))
+		pwm2.ChangeDutyCycle(pos2_next)
+		pwm1.ChangeDutyCycle(pos1_next)
+		pos1=pos1_next
+		pos2=pos2_next
 		time.sleep(0.1)
-
+#	pwm2.ChangeDutyCycle(m2)
+#        pwm1.ChangeDutyCycle(m1)
 def repos() :
 	pwm2.ChangeDutyCycle(0)
         pwm1.ChangeDutyCycle(0)
+
+pos1_init = 4
+pos2_init = 13
+pos1 = pos1_init
+pos2 = pos2_init
+GPIO.setup(config.get('motor1_pin'),GPIO.OUT)
+GPIO.setup(config.get('motor2_pin'),GPIO.OUT)
+pwm1=GPIO.PWM(config.get('motor1_pin'),config.get('motor_pulse'))
+pwm2=GPIO.PWM(config.get('motor2_pin'),config.get('motor_pulse'))
+pwm1.start(5)
+pwm2.start(5)
+WATER_PIN=config.get('WATER_PIN')
+GPIO.setup(WATER_PIN, GPIO.OUT)
 water_off()
 arrose_plante(0)
 

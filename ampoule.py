@@ -29,11 +29,12 @@ def light_off():
 
 def checkAmpoule():
 	heure = time.strftime('%H',time.localtime())
-	heure = int(heure)
-	
+	heure = int(heure)+1
 	if heure>=config.get('Heure_jour') and heure<config.get('Heure_nuit'):
 		light_on()
 	else:
 		light_off()
 
 
+
+print GPIO.input(AMPOULE_PIN)
